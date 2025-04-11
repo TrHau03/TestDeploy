@@ -6,20 +6,12 @@ import {
 } from "@/server/permissions/api";
 import { NextApiRequest } from "next";
 
-// type RouteContext = {
-//   params: {
-//     id: string;
-//   };
-// };
-type Context = {
-  params: {
-    id: string;
-  };
-};
+type Params =  { params: Promise<{ id: string }> }
 // ✅ GET
-export async function GET(_req: NextRequest, context:any) {
+export async function GET(_req: NextRequest, { params }: Params) {
   try {
-    const permission = await getPermissionById(Number(context.params.id));
+    const {id} = (await params);
+    const permission = await getPermissionById(Number(id));
     return NextResponse.json({
       _metadata: { success: true },
       result: { permission },
@@ -34,10 +26,12 @@ export async function GET(_req: NextRequest, context:any) {
 }
 
 // ✅ PUT
-export async function PUT(_req: NextRequest, context: any) {
+export async function PUT(_req: NextRequest, { params }: Params) {
   try {
     const body = await _req.json();
-    const updated = await updatePermission(Number(context.params.id), body);
+    const {id} = (await params);
+
+    const updated = await updatePermission(Number(id), body);
     return NextResponse.json({
       _metadata: { success: true },
       result: updated,
@@ -52,9 +46,10 @@ export async function PUT(_req: NextRequest, context: any) {
 }
 
 // ✅ DELETE
-export async function DELETE(_req: NextRequest, context: any) {
+export async function DELETE(_req: NextRequest, {params}: Params) {
   try {
-    const result = await deletePermission(Number(context.params.id));
+    const {id} = await params;
+    const result = await deletePermission(Number(id));
     return NextResponse.json({
       _metadata: { success: true },
       result,
