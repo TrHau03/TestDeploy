@@ -3,7 +3,7 @@ import RoleTable from "./components/RoleTable";
 import CreateRoleButton from "./components/CreateRoleButton"; // 👈 Thêm dòng này
 
 export default async function RolePage() {
-  const roles = await getAllRoles();
+  // const roles = await getAllRoles();
 
   return (
     <div className="p-6 space-y-6">
@@ -15,7 +15,7 @@ export default async function RolePage() {
         <CreateRoleButton />
       </div>
 
-      <RoleTable roles={roles} />
+      {/* <RoleTable roles={roles} /> */}
     </div>
   );
 }
