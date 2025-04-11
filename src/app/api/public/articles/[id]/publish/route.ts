@@ -3,11 +3,13 @@ import { HTTPEndpointDynamic } from "@/core/constants/endpoints";
 import http from "@/server/integration/http";
 import { PublishArticleResponseSchema } from "@/server/article/_internal/schema";
 import * as v from "valibot";
+import { Params } from "@/app/api/_internal/type";
 
-export async function POST(req: NextRequest, context: { params: { id: string } }) {
+export async function POST(req: NextRequest, {params} : Params) {
   try {
+    const {id} = await params
     const raw = await http
-      .post(HTTPEndpointDynamic.PUBLISH_ARTICLE(Number(context.params.id)))
+      .post(HTTPEndpointDynamic.PUBLISH_ARTICLE(Number(id)))
       .json();
     const response = v.parse(PublishArticleResponseSchema, raw);
 

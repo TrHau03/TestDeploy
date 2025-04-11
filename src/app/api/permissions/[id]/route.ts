@@ -5,8 +5,8 @@ import {
   deletePermission,
 } from "@/server/permissions/api";
 import { NextApiRequest } from "next";
+import { Params } from "../../_internal/type";
 
-type Params =  { params: Promise<{ id: string }> }
 // ✅ GET
 export async function GET(_req: NextRequest, { params }: Params) {
   try {
