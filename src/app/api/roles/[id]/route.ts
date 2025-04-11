@@ -4,10 +4,11 @@ import {
   updatePermission,
   deletePermission,
 } from "@/server/permissions/api";
+import { Params } from "../../_internal/type";
 
 // ✅ GET: Lấy permission theo ID
-export async function GET(req: NextRequest, context: { params: { id: string } }) {
-  const { id } = context.params;
+export async function GET(req: NextRequest, {params} : Params) {
+  const { id } = await params;
 
   try {
     const permission = await getPermissionById(Number(id));
@@ -25,8 +26,8 @@ export async function GET(req: NextRequest, context: { params: { id: string } })
 }
 
 // ✅ PUT: Cập nhật permission theo ID
-export async function PUT(req: NextRequest, context: { params: { id: string } }) {
-  const { id } = context.params;
+export async function PUT(req: NextRequest, {params} : Params) {
+  const { id } = await params;
 
   try {
     const body = await req.json();
@@ -46,8 +47,8 @@ export async function PUT(req: NextRequest, context: { params: { id: string } })
 }
 
 // ✅ DELETE: Xoá permission theo ID
-export async function DELETE(req: NextRequest, context: { params: { id: string } }) {
-  const { id } = context.params;
+export async function DELETE(req: NextRequest, {params} : Params) {
+  const { id } = await params;
 
   try {
     const result = await deletePermission(Number(id));
