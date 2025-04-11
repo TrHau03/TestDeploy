@@ -13,9 +13,9 @@ import { NextApiRequest } from "next";
 // };
 
 // ✅ GET
-export async function GET(_req: NextApiRequest) {
+export async function GET(_req: NextRequest,{ params }: { params: { id: string } }) {
   try {
-    const permission = await getPermissionById(Number(_req.query.id));
+    const permission = await getPermissionById(Number(params.id));
     return NextResponse.json({
       _metadata: { success: true },
       result: { permission },
@@ -30,10 +30,10 @@ export async function GET(_req: NextApiRequest) {
 }
 
 // ✅ PUT
-export async function PUT(_req: NextApiRequest) {
+export async function PUT(_req: NextRequest,{ params }: { params: { id: string } }) {
   try {
-    const body = await _req.body.json();
-    const updated = await updatePermission(Number(_req.query.id), body);
+    const body = await _req.json();
+    const updated = await updatePermission(Number(params.id), body);
     return NextResponse.json({
       _metadata: { success: true },
       result: updated,
@@ -48,9 +48,9 @@ export async function PUT(_req: NextApiRequest) {
 }
 
 // ✅ DELETE
-export async function DELETE(_req: NextApiRequest) {
+export async function DELETE(_req: NextRequest,{ params }: { params: { id: string } }) {
   try {
-    const result = await deletePermission(Number(_req.query.id));
+    const result = await deletePermission(Number(params.id));
     return NextResponse.json({
       _metadata: { success: true },
       result,
