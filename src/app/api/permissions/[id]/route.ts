@@ -11,9 +11,13 @@ import { NextApiRequest } from "next";
 //     id: string;
 //   };
 // };
-
+type Context = {
+  params: {
+    id: string;
+  };
+};
 // ✅ GET
-export async function GET(_req: NextRequest, context: { params: { id: string } }) {
+export async function GET(_req: NextRequest, context:Context) {
   try {
     const permission = await getPermissionById(Number(context.params.id));
     return NextResponse.json({
@@ -30,7 +34,7 @@ export async function GET(_req: NextRequest, context: { params: { id: string } }
 }
 
 // ✅ PUT
-export async function PUT(_req: NextRequest, context: { params: { id: string } }) {
+export async function PUT(_req: NextRequest, context: Context) {
   try {
     const body = await _req.json();
     const updated = await updatePermission(Number(context.params.id), body);
@@ -48,7 +52,7 @@ export async function PUT(_req: NextRequest, context: { params: { id: string } }
 }
 
 // ✅ DELETE
-export async function DELETE(_req: NextRequest, context: { params: { id: string } }) {
+export async function DELETE(_req: NextRequest, context: Context) {
   try {
     const result = await deletePermission(Number(context.params.id));
     return NextResponse.json({
