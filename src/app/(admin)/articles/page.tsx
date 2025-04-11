@@ -3,7 +3,7 @@ import ArticleTable from "./components/ArticleTable";
 import CreateArticleButton from "./components/CreateArticleButton";
 
 export default async function ArticlesPage() {
-  const articles = await getAllArticles();
+  // const articles = await getAllArticles();
 
   return (
     <div className="p-6 space-y-6">
@@ -13,7 +13,7 @@ export default async function ArticlesPage() {
         </h3>
         <CreateArticleButton/>
       </div>
-      <ArticleTable articles={articles} />
+      {/* <ArticleTable articles={articles} /> */}
     </div>
   );
 }
