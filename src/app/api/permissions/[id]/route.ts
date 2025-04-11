@@ -17,7 +17,7 @@ type Context = {
   };
 };
 // ✅ GET
-export async function GET(_req: NextRequest, context:Context) {
+export async function GET(_req: NextRequest, context:any) {
   try {
     const permission = await getPermissionById(Number(context.params.id));
     return NextResponse.json({
@@ -34,7 +34,7 @@ export async function GET(_req: NextRequest, context:Context) {
 }
 
 // ✅ PUT
-export async function PUT(_req: NextRequest, context: Context) {
+export async function PUT(_req: NextRequest, context: any) {
   try {
     const body = await _req.json();
     const updated = await updatePermission(Number(context.params.id), body);
@@ -52,7 +52,7 @@ export async function PUT(_req: NextRequest, context: Context) {
 }
 
 // ✅ DELETE
-export async function DELETE(_req: NextRequest, context: Context) {
+export async function DELETE(_req: NextRequest, context: any) {
   try {
     const result = await deletePermission(Number(context.params.id));
     return NextResponse.json({
