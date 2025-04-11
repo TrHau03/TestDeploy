@@ -5,7 +5,7 @@ import PermissionTable from "./components/PermissionTable";
 import CreatePermissionButton from "./components/CreatePermissionButton";
 
 export default async function PermissionPage() {
-  const permissions = await getAllPermissions();
+  // const permissions = await getAllPermissions();
 
   return (
     <div className="p-6 space-y-6">
@@ -18,7 +18,7 @@ export default async function PermissionPage() {
         <CreatePermissionButton />
       </div>
 
-      <PermissionTable permissions={permissions} />
+      {/* <PermissionTable permissions={permissions} /> */}
     </div>
   );
 }
